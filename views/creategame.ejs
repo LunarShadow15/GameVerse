@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="flex flex-col justify-center items-center min-h-screen p-4">
+        <!-- Create Game Form -->
+        <form action="/creategame" method="post" class="w-full max-w-lg bg-gray-800 p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold mb-5 text-center">Create New Game Community</h2>
+            <div class="mb-4">
+                <input class="border-2 border-gray-600 p-2 w-full rounded-md text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent" 
+                       type="text" name="name" placeholder="Enter Game Name" required>
+            </div>
+            <div class="mb-4">
+                <input class="border-2 border-gray-600 p-2 w-full rounded-md text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent" 
+                       type="text" name="img" placeholder="Enter Img URL" required>
+            </div>
+            <div class="mb-6">
+                <textarea name="content" rows="10"
+                    class="resize-none w-full bg-gray-700 border-2 border-gray-600 text-white placeholder-gray-400 p-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    placeholder="Game description ..." required></textarea>
+            </div>
+            <div>
+                <input class="cursor-pointer w-full text-white text-lg bg-red-600 hover:bg-red-700 rounded-md p-2 block mb-4 transition ease-in-out duration-150" 
+                       type="submit" value="Create Game">
+            </div>
+        </form>
+        <!-- Home Button -->
+        <div class="w-full max-w-lg">
+            <a href="/home" class="block text-center text-white bg-teal-500 hover:bg-teal-400 rounded-md p-3 transition-transform transform hover:scale-105">
+                Go to Home
+            </a>
+        </div>
+    </div>
+</body>
+</html>

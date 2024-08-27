@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamers' Social Hub Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap');
+
+        .font-custom {
+            font-family: 'New Amsterdam', cursive;
+        }
+
+        .popup-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform-origin: center;
+              }
+
+        .popup-effect:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gray-900 text-white">
+    <div class="container mx-auto p-6">
+        <!-- Welcome Banner -->
+        <!-- Floating Top Navigation Bar -->
+        <div class="fixed top-0 left-8 right-8 p-6 bg-gradient-custom border-t-0 border-gray-600 shadow-lg rounded-lg z-20 text-white">
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="fixed top-4 left-8 right-8 p-4 bg-black bg-opacity-70 border-b-2 border-gray-600 shadow-lg rounded-lg z-20 flex justify-between items-center">
+            <!-- Left Side: Navigation Links -->
+            <ul class="flex space-x-6">
+                <li><a href="/profile" class="py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg hover-pop">My Profile</a></li>
+                <li><a href="/creategame" class="py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg hover-transform">Create Game</a></li>
+                <li><a href="/createpost" class="py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg hover-transform">Create Discussion</a></li>
+            </ul>
+
+            <!-- Right Side: Logout Button -->
+            <ul class="flex">
+                <li><a href="/logout" class="py-2 px-4 bg-red-600 text-white hover:bg-red-500 rounded-lg hover-pop">Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- Trending Games Section -->
+        
+
+
+
+        <div class="bg-gray-800 p-6 rounded-lg mb-8 mt-20"> <!-- Added margin-top to avoid overlap with nav -->
+            <h2 class="text-4xl font-custom mb-6">Trending Games</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                
+                <% gamer.forEach(function(game){%>                 
+                    <div class="bg-gray-700 p-4 rounded-lg popup-effect">
+                        <a href="/gamepage/<%=game.id%>">
+                        <img src="<%=game.img%>" alt="Game Image" class="rounded-lg mb-4">
+                        </a>
+                        <div class="flex justify-between items-center">
+                            <p class="font-custom text-3xl"><%=game.name%></p>
+                            <button class="Btn">
+                                <span class="leftContainer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" fill="#fff">
+                                        <path d="M313.4 32.9c26 5.2 42.9 30.5 37.7 56.5l-2.3 11.4c-5.3 26.7-15.1 52.1-28.8 75.2H464c26.5 0 48 21.5 48 48c0 18.5-10.5 34.6-25.9 42.6C497 275.4 504 288.9 504 304c0 23.4-16.8 42.9-38.9 47.1c4.4 7.3 6.9 15.8 6.9 24.9c0 21.3-13.9 39.4-33.1 45.6c.7 3.3 1.1 6.8 1.1 10.4c0 26.5-21.5 48-48 48H294.5c-19 0-37.5-5.6-53.3-16.1l-38.5-25.7C176 420.4 160 390.4 160 358.3V320 272 247.1c0-29.2 13.3-56.7 36-75l7.4-5.9c26.5-21.2 44.6-51 51.2-84.2l2.3-11.4c5.2-26 30.5-42.9 56.5-37.7zM32 192H96c17.7 0 32 14.3 32 32V448c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V224c0-17.7 14.3-32 32-32z"></path>
+                                    </svg>
+                                    <span class="like">Like</span>
+                                </span>
+                                <span class="likeCount">1,756</span>
+                            </button>
+                        </div>
+                    </div>
+            <%})%>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegant Black and Gold Theme</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap');
+
+        .font-custom {
+            font-family: 'New Amsterdam', cursive;
+        }
+
+        .bg-custom {
+            background-image: url(<%=games.img%>); /* Update this path if necessary */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .bg-gradient-custom {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
+        }
+
+        .bg-gold {
+            background-color: #FFD700;
+        }
+
+        .text-gold {
+            color: #FFD700;
+        }
+
+        /* Ensure sidebar is positioned at top-left */
+        .sidebar {
+            position: fixed;
+            top: 1.5rem; /* Space from top */
+            left: 1.5rem; /* Space from left */
+            width: 16rem;
+            height: auto;
+            max-height: calc(100vh - 2rem);
+            overflow-y: auto;
+            margin-top: 0; /* Reset margin-top */
+        }
+
+        .main-content {
+            margin-left: 20rem; /* Align with sidebar */
+            margin-right: 1rem; /* Adjust as needed */
+            padding: 1rem;
+        }
+
+        .forums {
+            margin-left: 20rem; /* Align with main content margin */
+            margin-right: 1rem; /* Adjust as needed */
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+
+<body class="bg-custom min-h-screen w-full text-white">
+
+    <!-- Main Content -->
+    <div class="main-content p-6 mt-4 bg-gradient-custom border-t-2 border-gray-600 shadow-lg rounded-lg z-20 text-white">
+        <h1 class="text-3xl font-custom mb-4">Game Description</h1>
+        <p></p>
+        <!-- Add more content here to demonstrate non-overlapping behavior -->
+    </div>
+
+    <!-- Forums Section -->
+    <div class="forums mt-4 p-6 bg-gray-800 bg-opacity-70 shadow-lg rounded-lg z-10">
+        <h2 class="text-2xl font-custom mb-4">GTA 5 Forums</h2>
+        <ul>
+            <li class="mb-4">
+                <a href="/gamepage/<%=games._id%>/generaldiscussion" class="block py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg transition">General Discussion</a>
+            </li>
+            <li class="mb-4">
+                <a href="#" class="block py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg transition">Strategies and Tips</a>
+            </li>
+            <li class="mb-4">
+                <a href="#" class="block py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg transition">Modding Community</a>
+            </li>
+            <li class="mb-4">
+                <a href="#" class="block py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg transition">Roleplay Servers</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar bg-gray-800 bg-opacity-30 text-white p-4 shadow-lg transform transition duration-300 hover:shadow-2xl hover:bg-black rounded-lg z-10">
+        <div class="text-3xl font-custom mb-4">Sidebar</div>
+        <nav>
+            <ul>
+                <li class="mb-4">
+                    <a href="/home" class="block py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg transition">Home</a>
+                </li>
+                <li class="mb-4">
+                    <a href="/trendingpage" class="block py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg transition">Trending Games</a>
+                </li>
+                <li class="mb-4">
+                    <a href="/profile" class="block py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg transition">Profile</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+</body>
+
+</html>

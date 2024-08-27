@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= post.title %></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap');
+        .font-custom {
+            font-family: 'New Amsterdam', cursive;
+        }
+        body {
+            background-color: #1a1a1b;
+            color: #d7dadc;
+            
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .post-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #d7dadc;
+            margin-bottom: 20px;
+        }
+
+        .post-content {
+            background-color: #272729;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #d7dadc;
+        }
+
+        .comments-section {
+            background-color: #272729;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .comment-item {
+            background-color: #333336;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .comment-author {
+            font-weight: bold;
+            color: #f50;
+        }
+
+        .comment-time {
+            font-size: 0.85rem;
+            color: #818384;
+        }
+
+        .comment-reply {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .reply-box {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #444446;
+            border-radius: 8px;
+        }
+
+        .comment-reply button {
+            background-color: #0079d3;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .comment-reply button:hover {
+            background-color: #005a9c;
+        }
+
+        .comment-reply textarea {
+            width: 100%;
+            background-color: #2a2a2b;
+            border: 1px solid #444446;
+            color: #d7dadc;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+            resize: none;
+        }
+
+    </style>
+    <script>
+        function toggleReplyBox(id) {
+            const replyBox = document.getElementById('reply-box-' + id);
+            replyBox.style.display = replyBox.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</head>
+
+<body>
+    <nav class="fixed top-4 left-8 right-8 p-4 bg-black bg-opacity-70 border-b-2 border-gray-600 shadow-lg rounded-lg z-20 flex justify-between items-center">
+        <!-- Left Side: Navigation Links -->
+        <ul class="flex space-x-6">
+            <li><a href="/profile" class="py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg">My Profile</a></li>
+            <li><a href="/creategame" class="py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg">Create Game</a></li>
+            <li><a href="/createpost" class="py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg">Create Discussion</a></li>
+            <li><a href="/trendingpage" class="py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg">Trending Games</a></li>
+        </ul>
+
+        <!-- Right Side: Logout Button -->
+        <ul class="flex">
+            <li><a href="/logout" class="py-2 px-4 bg-red-600 text-white hover:bg-red-500 rounded-lg">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container mt-24">
+        <h1 class="post-title"><%= post.title %></h1>
+        <div class="post-content">
+            <p><%= post.content %></p>
+        </div>
+
+        <div class="comments-section">
+            <h2 class="font-custom text-3xl mb-4">Comments:</h2>
+            <ul>
+                <% function renderComments(comments) { %>
+                    <% comments.forEach(comment => { %>
+                        <li class="comment-item">
+                            <div class="comment-header">
+                                <span class="comment-author">@<%= comment.username %></span>
+                                <span class="comment-time"><%= comment.postedAt.toDateString() %></span>
+                            </div>
+                            <p><%= comment.comment %></p>
+
+                            <div class="comment-reply">
+                                <button onclick="toggleReplyBox('<%= comment._id %>')">Reply</button>
+                                <div id="reply-box-<%= comment._id %>" class="reply-box">
+                                    <form action="/post/<%= post._id %>/comment" method="POST">
+                                        <input type="hidden" name="parentId" value="<%= comment._id %>">
+                                        <textarea name="comment" placeholder="Reply to this comment"></textarea>
+                                        <button type="submit">Send</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <% if (comment.children.length > 0) { %>
+                                <ul>
+                                    <%= renderComments(comment.children) %>
+                                </ul>
+                            <% } %>
+                        </li>
+                    <% }); %>
+                <% } %>
+
+                <%= renderComments(comments) %>
+            </ul>
+        </div>
+
+        <form action="/post/<%= post._id %>/comment" method="POST" class="comment-reply mt-6">
+            <input type="hidden" name="parentId" value="">
+            <textarea name="comment" placeholder="Add a comment"></textarea>
+            <button type="submit">Comment</button>
+        </form>
+    </div>
+</body>
+
+</html>

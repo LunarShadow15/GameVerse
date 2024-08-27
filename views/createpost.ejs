@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Discussion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .input-focus {
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .input-focus:focus {
+            border-color: #4f9a94;
+            box-shadow: 0 0 0 3px rgba(79, 232, 206, 0.3);
+        }
+        .button-hover:hover {
+            background: linear-gradient(90deg, rgba(45, 212, 191, 1) 0%, rgba(14, 128, 113, 1) 100%);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex justify-center items-center min-h-screen p-4">
+    <form action="/createpost" method="post" class="bg-gray-800 p-8 rounded-lg w-full max-w-lg shadow-lg border border-gray-700">
+        <h1 class="text-3xl font-extrabold mb-6 text-center text-gradient bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">
+            Create a Discussion
+        </h1>
+        
+        <div class="mb-6">
+            <label for="heading" class="block text-lg mb-2 font-semibold">Discussion Heading</label>
+            <input type="text" name="heading" id="heading" placeholder="Enter the heading of the discussion" class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 input-focus">
+        </div>
+
+        <div class="mb-6">
+            <label for="content" class="block text-lg mb-2 font-semibold">Content</label>
+            <textarea name="content" id="content" placeholder="Write your content here" rows="6" class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 input-focus"></textarea>
+        </div>
+
+        <div class="mb-6">
+            <label for="gamename" class="block text-lg mb-2 font-semibold">Select Game</label>
+            <select name="gamename" id="gamename" class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 input-focus">
+                <% gamelist.forEach(function(game){ %>
+                    <option value="<%= game.name %>"><%= game.name %></option>
+                <% }) %>
+            </select>
+        </div>
+
+        <div class="text-center">
+            <input type="submit" value="Submit" class="bg-teal-500 button-hover text-white font-bold py-3 px-6 rounded-lg transition-transform duration-300 ease-in-out cursor-pointer mb-4">
+            <!-- Back to Home Button -->
+            <a href="/home" class="bg-gray-600 hover:bg-gray-500 text-white font-bold py-3 px-6 rounded-lg transition-transform duration-300 ease-in-out inline-block">
+                Back to Home
+            </a>
+        </div>
+    </form>
+</body>
+</html>

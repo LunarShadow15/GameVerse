@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamers' Social Hub Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap');
+
+        .font-custom {
+            font-family: 'New Amsterdam', cursive;
+        }
+
+        .popup-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform-origin: center;
+        }
+
+        .popup-effect:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .clickable-heading {
+            text-decoration: none;
+            color: inherit;
+            display: inline-block;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gray-900 text-white">
+    <div class="container mx-auto p-6">
+        <!-- Floating Top Navigation Bar -->
+        <div class="fixed top-0 left-8 right-8 p-6 bg-gradient-custom border-t-0 border-gray-600 shadow-lg rounded-lg z-20 text-white">
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="fixed top-4 left-8 right-8 p-4 bg-black bg-opacity-70 border-b-2 border-gray-600 shadow-lg rounded-lg z-20 flex justify-between items-center">
+            <!-- Left Side: Navigation Links -->
+            <ul class="flex space-x-6">
+                <li><a href="/profile" class="py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg hover-pop">My Profile</a></li>
+                <li><a href="/creategame" class="py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg hover-transform">Create Game</a></li>
+                <li><a href="/createpost" class="py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg hover-transform">Create Discussion</a></li>
+                <li><a href="/trendingpage" class="py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg hover-transform">Trending Games</a></li>
+            </ul>
+
+            <!-- Right Side: Logout Button -->
+            <ul class="flex">
+                <li><a href="/logout" class="py-2 px-4 bg-red-600 text-white hover:bg-red-500 rounded-lg hover-pop">Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- Sidebar and Divisions -->
+        <div class="flex mt-24">
+            <!-- Sidebar -->
+            <aside class="w-64 bg-gray-800 bg-opacity-70 text-white p-4 shadow-lg transform transition duration-300 hover:shadow-2xl hover:bg-black rounded-lg max-h-[calc(100vh-2rem)] overflow-y-auto z-10">
+                <div class="text-3xl font-custom mb-4">Trending Forums</div>
+                <nav>
+                    <ul>
+                        <% gamer.forEach(function(games) { %>
+                            <li class="mb-4">
+                                <a href="gamepage/<%= games.id %>" class="block py-2 px-4 bg-green-600 hover:bg-green-500 rounded-lg transition">
+                                    <%= games.name %>
+                                </a>
+                            </li>
+                        <% }) %>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Division 1 (60% width) -->
+            <div class="flex-1 bg-gray-700 bg-opacity-70 text-white p-4 shadow-lg rounded-lg ml-4" style="flex-basis: 60%;">
+                <h2 class="text-xl mb-4">Division 1</h2>
+                <% post.forEach(function(posts) { %>
+                    <a href="/post/<%= posts._id %>" class="clickable-heading inline">
+                    <div class="bg-gray-600 bg-opacity-70 text-white p-4 shadow-lg rounded-lg mb-2 popup-effect">
+                            <h2 class="text-xl mb-2"><%= posts.heading %></h2>
+                        
+                        <!-- Add any additional content here -->
+                    </div>
+                </a>
+                <% }) %>
+            </div>
+
+            <!-- Division 2 (40% width) -->
+            <div class="w-64 bg-gray-700 bg-opacity-70 text-white p-4 shadow-lg rounded-lg ml-4" style="flex-basis: 40%;">
+                <h2 class="text-xl font-custom mb-4">Division 2</h2>
+                <p>Content for Division 2 goes here.</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

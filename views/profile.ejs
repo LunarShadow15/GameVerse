@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamers' Social Hub Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap');
+
+        .font-custom {
+            font-family: 'New Amsterdam', cursive;
+        }
+
+        .hover-pop {
+            transition: transform 0.1s ease;
+        }
+
+        .hover-pop:hover {
+            transform: scale(1.2);
+            transition: transform 0.2s ease;
+        }
+
+        .clickable-heading {
+            text-decoration: none;
+            color: inherit;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white">
+
+    <!-- Floating Top Navigation Bar -->
+    <div class="fixed top-0 left-8 right-8 p-6 bg-gradient-custom border-t-0 border-gray-600 shadow-lg rounded-lg z-20 text-white">
+        <nav class="fixed top-4 left-8 right-8 p-4 bg-black bg-opacity-70 border-b-2 border-gray-600 shadow-lg rounded-lg z-20 flex justify-between items-center">
+            <!-- Left Side: Navigation Links -->
+            <ul class="flex space-x-6">
+                <li><a href="/home" class="py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg hover-pop">Home</a></li>
+                <li><a href="/creategame" class="py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg hover-transform">Create Game</a></li>
+                <li><a href="/createpost" class="py-2 px-4 bg-transparent text-white hover:bg-green-500 rounded-lg hover-transform">Create Discussion</a></li>
+            </ul>
+
+            <!-- Right Side: Logout Button -->
+            <ul class="flex">
+                <li><a href="/logout" class="py-2 px-4 bg-red-600 text-white hover:bg-red-500 rounded-lg hover-pop">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container mx-auto p-6 pt-20">
+        <!-- Welcome Banner -->
+        <div class="bg-gray-800 p-8 rounded-lg text-left mb-8">
+            <div class="flex items-center">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXBL7vESZ-p6ExmZ7xvSkBOLzRuC54n-OF8w&s" alt="Profile Picture" class="w-16 h-16 rounded-full mr-4">
+                <h1 class="text-2xl">Welcome <%= user.name %></h1>
+            </div>
+        </div>
+
+        <!-- Sidebar and Divisions -->
+        <div class="flex">
+            <!-- Sidebar -->
+            <aside class="w-64 bg-gray-800 bg-opacity-70 text-white p-4 shadow-lg transform transition duration-300 hover:shadow-2xl hover:bg-black rounded-lg max-h-[calc(100vh-2rem)] overflow-y-auto z-10">
+                <div class="text-3xl font-custom mb-4">Trending Forums</div>
+                <nav>
+                    <ul>
+                        <% gamer.forEach(function(games) { %>
+                            <li class="mb-4">
+                                <a href="gamepage/<%= games.id %>" class="block py-2 px-4 bg-green-600 hover:bg-green-500 rounded-lg transition">
+                                    <%= games.name %>
+                                </a>
+                            </li>
+                        <% }) %>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Division 1 (60% width) -->
+            <div class="flex-1 bg-gray-700 bg-opacity-70 text-white p-4 shadow-lg rounded-lg ml-4" style="flex-basis: 60%;">
+                <h2 class="font-custom text-4xl pb-2 text-green-500">My Forums</h2>
+                <% post.forEach(function(posts) { %>
+                    <% if(posts.userinfo && user._id && String(posts.userinfo).trim() === String(user._id).trim()) { %>
+                        
+                        <div class="bg-gray-600 bg-opacity-70 text-white p-4 shadow-lg rounded-lg mb-2">
+                            <a href="/post/<%= posts._id %>" class="clickable-heading">
+                                <h2 class="text-xl mb-4"><%= posts.heading %></h2>
+                            </a>
+                            <!-- Add any additional content here -->
+                        </div>
+
+                    <%}%> 
+                <% }) %>
+            </div>
+
+            <!-- Division 2 (40% width) -->
+            <div class="w-64 bg-gray-700 bg-opacity-70 text-white p-4 shadow-lg rounded-lg ml-4" style="flex-basis: 40%;">
+                <h2 class="font-custom text-3xl pb-2">Recent Comments</h2>
+                <div class="bg-gray-600 bg-opacity-70 text-white p-4 shadow-lg rounded-lg mb-2">
+                    <% for (var i = 0; i < Math.min(comment.length, 5); i++) { %>
+                        <a href="/post/<%=comment[i].post%>">
+                            <div class="info flex justify-between mb-1">
+                                <p class="text-orange-500 inline">@<%=comment[i].username %></p> 
+                                <p class="text-orange-500 inline"><%=comment[i].postedAt.toDateString() %></p>
+                            </div>
+                        
+                        <h2 class="text-xl mb-4"><%= comment[i].comment %></h2>
+
+                        </a>
+                      <% } %>
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

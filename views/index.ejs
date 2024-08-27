@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes slide {
+      0% {
+        opacity: 0;
+        transform: scale(1.1);
+      }
+
+      10% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      33% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      43% {
+        opacity: 0;
+        transform: scale(1.1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(1.1);
+      }
+    }
+
+    .slider {
+      animation: slide 15s infinite;
+    }
+
+    .slide1 {
+      animation-delay: 0s;
+    }
+
+    .slide2 {
+      animation-delay: 5s;
+    }
+
+    .slide3 {
+      animation-delay: 10s;
+    }
+  </style>
+</head>
+
+<body class="relative w-full min-h-screen bg-zinc-900 flex justify-center items-center overflow-hidden">
+  <!-- Background Image Slider -->
+  <div class="absolute inset-0 z-0">
+    <div class="slider absolute inset-0 bg-cover bg-center filter blur-lg slide1"
+      style="background-image: url(https://w0.peakpx.com/wallpaper/200/431/HD-wallpaper-gta-5-dont-care.jpg);"></div>
+    <div class="slider absolute inset-0 bg-cover bg-center filter blur-lg slide2"
+      style="background-image: url(https://wallpapers.com/images/high/battlefield-1-4k-gaming-lv1bce7p143co6yg.webp);">
+    </div>
+    <div class="slider absolute inset-0 bg-cover bg-center filter blur-lg slide3"
+      style="background-image: url(https://imgs.callofduty.com/content/dam/atvi/callofduty/cod-touchui/blackops6/meta/BO6_LP-meta_image.jpg);">
+    </div>
+    <div class="slider absolute inset-0 bg-cover bg-center filter blur-lg slide2"
+      style="background-image: url(https://dmarket.com/blog/best-csgo-wallpapers/cs-go-wallpaper_hub6d22fdcaa8629b6f1a6781f6a106093_183473_1920x1080_resize_q100_lanczos.jpg);">
+    </div>
+  </div>
+
+  <!-- Login Form -->
+  <div class="relative z-10 w-full max-w-md bg-zinc-800 border-2 border-green-500 p-6 rounded-3xl">
+    <form class="space-y-6" action="/login" method="post">
+      <p class="text-3xl font-extrabold text-green-600 text-center pb-2">Log In</p>
+      <div class="space-y-4">
+        <div>
+          <label for="email" class="block text-sm font-medium text-white">Email</label>
+          <input type="email" name="email" id="email" required=""
+            class="mt-1 block w-full px-3 py-2 bg-zinc-700 text-white border border-zinc-600 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" />
+        </div>
+        <div>
+          <label for="password" class="block text-sm font-medium text-white">Password</label>
+          <input type="password" name="password" id="password" required=""
+            class="mt-1 block w-full px-3 py-2 bg-zinc-700 text-white border border-zinc-600 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" />
+        </div>
+        <div class="flex justify-end">
+          <a href="#" class="text-sm text-green-500 hover:text-green-600">Forgot password?</a>
+        </div>
+      </div>
+      <div>
+        <input type="submit" value="Log in"
+          class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" />
+      </div>
+      <div class="text-center text-sm text-white">
+        Don't have an account? <a href="/create" class="text-green-500 hover:text-green-600">Sign up</a>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
